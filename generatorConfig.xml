@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017-2022 布比（北京）网络技术有限公司.
+  ~ All rights reserved.
+  -->
+
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+            location="/Users/jaryoung/.m2/repository/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar" />
+	<context id="user_role">
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/cbc" driverClass="com.mysql.jdbc.Driver"
+						userId="root" password="db79" />
+
+		<javaModelGenerator targetPackage="cn.gc.domain"
+							targetProject="src/main/java" />
+
+		<sqlMapGenerator targetPackage="mapper/user/"
+						 targetProject="src/main/resources" />
+
+		<javaClientGenerator targetPackage="cn.gc.service.mapper"
+							 targetProject="src/main/java" type="XMLMAPPER" />
+        <table schema="" tableName="jhi_user" domainObjectName="UserDomain"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true"
+						  type="post" />
+		</table>
+	</context>
+
+</generatorConfiguration>
