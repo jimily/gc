@@ -20,6 +20,7 @@ import cn.gc.service.adapter.model.output.BlockchainAccount;
 import cn.gc.service.adapter.model.output.IdeasMetadataValueTemp;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,6 +85,7 @@ public class BlockchainAdapterService {
      */
     public String registerIdea(BlockchainAccount sponsor, RegisterIdeaInput input) {
         BlockchainKeyPair destAccount = SecureKeyGenerator.generateBubiKeyPair();
+        System.out.println(destAccount.toString());
         String inputData = JSONObject.toJSONString(input);
         String contractContent = getContract4Idea();
         contractContent = contractContent.replace("{temp_registrant}", sponsor.getAddress());
@@ -91,7 +93,7 @@ public class BlockchainAdapterService {
             CreateAccountOperation createAccountOperation = new CreateAccountOperation.Builder()
                 .buildDestAddress(destAccount.getBubiAddress())
                 // 权限部分
-                .buildPriMasterWeight(3)
+                .buildPriMasterWeight(10)
                 .buildPriTxThreshold(10)
                 .buildOperationSourceAddress(sponsor.getAddress())
                 .buildScript(contractContent)
@@ -105,7 +107,7 @@ public class BlockchainAdapterService {
             operationService.newTransaction(sponsor.getAddress())
                 .buildAddOperation(createAccountOperation)
                 .buildAddOperation(invokeContractOperation)
-                .buildAddOperation(OperationFactory.newSetMetadataOperation(key, JSONObject.toJSONString(initIdeasMetadataValue())))
+                .buildAddOperation(OperationFactory.newSetMetadataOperation(key, JSONObject.toJSONString(initIdeasMetadataValue(destAccount.getBubiAddress()))))
                 .buildAddSigner(sponsor.getPublicKey(), sponsor.getPrivateKey())
                 .commit();
         } catch (SdkException e) {
@@ -198,6 +200,7 @@ public class BlockchainAdapterService {
         ideasMetadataValue.setStatus(projectJSONObject.get("status").toString());
         ideasMetadataValue.setIncome(Long.parseLong(projectJSONObject.get("income").toString()));
         ideasMetadataValue.setPublication(publication);
+        ideasMetadataValue.setContractAddress(input.getContractAddress());
         try {
             operationService.newTransaction(sponsor.getAddress())
                 .buildAddOperation(OperationFactory.newSetMetadataOperation(input.getProject(), JSONObject.toJSONString(ideasMetadataValue)))
@@ -214,7 +217,23 @@ public class BlockchainAdapterService {
      * @param input
      */
     public void buyCopyright(BlockchainAccount sponsor, BuyCopyRightInput input) {
-
+        SetMetadata sponsorOutlay = bcQueryService.getAccount(sponsor.getAddress(), "outlay");
+        Integer outlay = (Integer)JSONObject.parse(sponsorOutlay.getValue());
+        outlay = outlay + input.getAmount().intValue();
+        String inputData = JSONObject.toJSONString(input);
+        try {
+            InvokeContractOperation invokeContractOperation = new InvokeContractOperation.Builder()
+                .buildDestAddress(input.getRegistrant())
+                .buildInputData(inputData)
+                .build();
+            operationService.newTransaction(sponsor.getAddress())
+                .buildAddOperation(invokeContractOperation)
+                .buildAddOperation(OperationFactory.newSetMetadataOperation("outlay", outlay.toString()))
+                .buildAddSigner(sponsor.getPublicKey(), sponsor.getPrivateKey())
+                .commit();
+        } catch (SdkException e) {
+            logger.error("调用购买版权合约失败", e);
+        }
     }
 
     private String getContract4User() {
@@ -257,7 +276,7 @@ public class BlockchainAdapterService {
         return stringBuffer.toString();
     }
 
-    private IdeasMetadataValue initIdeasMetadataValue() {
+    private IdeasMetadataValue initIdeasMetadataValue(String contractAddress) {
         CopyrightInfo copyrightInfo = new CopyrightInfo();
         copyrightInfo.setStatus(SaleStatusConstant.NOTFORSALE);
         copyrightInfo.setBuyer("");
@@ -266,6 +285,7 @@ public class BlockchainAdapterService {
         ideasMetadataValue.setStatus(ContractStatus.CROWDFUNDING);
         ideasMetadataValue.setIncome(0L);
         ideasMetadataValue.setPublication(copyrightInfo);
+        ideasMetadataValue.setContractAddress(contractAddress);
         return ideasMetadataValue;
     }
 

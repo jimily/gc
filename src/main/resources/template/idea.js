@@ -168,14 +168,14 @@ function finish() {
 
 }
 
-/** 众筹结束将额度转给创意者**/
+/** 众筹结束将收益转给创意者**/
 function settlement() {
     var info = JSON.parse(callBackGetAccountMetaData(thisAddress, 'info').value);
-    var total = info.total;
+    var total = getAmount('total');
     var balance = getAmount('balance');
     var registrantInput = {
         'action':'finishRaise',
-        'project':'ideas'+info.classify+info.name+thisAddress,
+        'project':initProject('ideas',info.classify,info.name,thisAddress),
         'amount':total - balance
     };
 
@@ -183,13 +183,17 @@ function settlement() {
         'operations': [{
             'type': 3,
             'payment': {
-                'dest_address': registrant
-            },
-            'input': JSON.stringify(registrantInput)
+                'dest_address': registrant,
+                'input': JSON.stringify(registrantInput)
+            }
         }]
     };
 
     callBackDoOperation(transaction);
+}
+
+function initProject(type,classify,name,thisAddress) {
+    return type + "-" + classify + "-" + name + "-" + thisAddress;
 }
 
 /** 创意分润**/
@@ -205,7 +209,6 @@ function profit(input) {
         return;
     }
     var info = JSON.parse(callBackGetAccountMetaData(thisAddress, 'info').value);
-    var project = info.classify + info.name + thisAddress;
     var operations = [];
     var balance = input.amount;
     for (var i = 0 ; i < investorRecords.length; i++) {
@@ -213,7 +216,7 @@ function profit(input) {
         var profit = paseInt(input.amount * investor.rate / 100);
         balance = balance - profit;
         var incomeInput = {
-            'project':'invest' + project,
+            'project':initProject('invest',info.classify,info.name,thisAddress),
             'amount': profit,
             'contractAddress': thisAddress,
             'action':'incomeOfInveste'
@@ -221,23 +224,23 @@ function profit(input) {
         operations.push({
             'type': 3,
             'payment': {
-                'dest_address': investor.address
-            },
-            'input': JSON.stringify(incomeInput)
+                'dest_address': investor.address,
+                'input': JSON.stringify(incomeInput)
+            }
         });
     }
     var incomeInput = {
         'contractAddress':thisAddress,
-        'project':'ideas' + project,
+        'project':initProject('ideas',info.classify,info.name,thisAddress),
         'amount': balance,
         'action':'incomeOfIdea'
     };
     operations.push({
         'type': 3,
         'payment': {
-            'dest_address': registrant
-        },
-        'input': JSON.stringify(incomeInput)
+            'dest_address': registrant,
+            'input': JSON.stringify(incomeInput)
+        }
     });
     var transaction = {
         'operations': operations

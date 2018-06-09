@@ -11,6 +11,7 @@ public class IdeasMetadataValue {
     private String status;
     private Long income;
     private CopyrightInfo publication;
+    private String contractAddress;
 
     public String getStatus() {
         return status;
@@ -34,5 +35,13 @@ public class IdeasMetadataValue {
 
     public void setPublication(CopyrightInfo publication) {
         this.publication = publication;
+    }
+
+    public String getContractAddress() {
+        return contractAddress;
+    }
+
+    public void setContractAddress(String contractAddress) {
+        this.contractAddress = contractAddress;
     }
 }
