@@ -1,0 +1,221 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-project-heading" jhiTranslate="gcApp.project.home.createOrEditLabel">Create or edit a Project</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!project.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="project.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="project.name" required minlength="1" maxlength="255"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.type" for="field_type">Type</label>
+                    <input type="number" class="form-control" name="type" id="field_type"
+                        [(ngModel)]="project.type" required/>
+                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.type?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="project.description" required minlength="1" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.copyrightNo" for="field_copyrightNo">Copyright No</label>
+                    <input type="text" class="form-control" name="copyrightNo" id="field_copyrightNo"
+                        [(ngModel)]="project.copyrightNo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.ratio" for="field_ratio">Ratio</label>
+                    <input type="number" class="form-control" name="ratio" id="field_ratio"
+                        [(ngModel)]="project.ratio" required/>
+                    <div [hidden]="!(editForm.controls.ratio?.dirty && editForm.controls.ratio?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.ratio?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.ratio?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.gross" for="field_gross">Gross</label>
+                    <input type="number" class="form-control" name="gross" id="field_gross"
+                        [(ngModel)]="project.gross" required/>
+                    <div [hidden]="!(editForm.controls.gross?.dirty && editForm.controls.gross?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.gross?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.gross?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.onceBuyLimit" for="field_onceBuyLimit">Once Buy Limit</label>
+                    <input type="number" class="form-control" name="onceBuyLimit" id="field_onceBuyLimit"
+                        [(ngModel)]="project.onceBuyLimit" required/>
+                    <div [hidden]="!(editForm.controls.onceBuyLimit?.dirty && editForm.controls.onceBuyLimit?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.onceBuyLimit?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.onceBuyLimit?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.balance" for="field_balance">Balance</label>
+                    <input type="number" class="form-control" name="balance" id="field_balance"
+                        [(ngModel)]="project.balance" required/>
+                    <div [hidden]="!(editForm.controls.balance?.dirty && editForm.controls.balance?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.balance?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.balance?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.isEnd" for="field_isEnd">Is End</label>
+                    <input type="number" class="form-control" name="isEnd" id="field_isEnd"
+                        [(ngModel)]="project.isEnd" required/>
+                    <div [hidden]="!(editForm.controls.isEnd?.dirty && editForm.controls.isEnd?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isEnd?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.isEnd?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.contractAddress" for="field_contractAddress">Contract Address</label>
+                    <input type="text" class="form-control" name="contractAddress" id="field_contractAddress"
+                        [(ngModel)]="project.contractAddress" required minlength="1" maxlength="64"/>
+                    <div [hidden]="!(editForm.controls.contractAddress?.dirty && editForm.controls.contractAddress?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.contractAddress?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.contractAddress?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.contractAddress?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 64 }">
+                        This field cannot be longer than 64 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.userId" for="field_userId">User Id</label>
+                    <input type="number" class="form-control" name="userId" id="field_userId"
+                        [(ngModel)]="project.userId" required/>
+                    <div [hidden]="!(editForm.controls.userId?.dirty && editForm.controls.userId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.userId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.userId?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.createTime" for="field_createTime">Create Time</label>
+                    <input type="number" class="form-control" name="createTime" id="field_createTime"
+                        [(ngModel)]="project.createTime" required/>
+                    <div [hidden]="!(editForm.controls.createTime?.dirty && editForm.controls.createTime?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createTime?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.createTime?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.project.updateTime" for="field_updateTime">Update Time</label>
+                    <input type="number" class="form-control" name="updateTime" id="field_updateTime"
+                        [(ngModel)]="project.updateTime" required/>
+                    <div [hidden]="!(editForm.controls.updateTime?.dirty && editForm.controls.updateTime?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.updateTime?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.updateTime?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <span class="fas fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fas fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

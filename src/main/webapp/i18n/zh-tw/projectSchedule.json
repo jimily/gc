@@ -1,0 +1,27 @@
+
+{
+    "gcApp": {
+        "projectSchedule" : {
+            "home": {
+                "title": "Project Schedules",
+                "createLabel": "建立一筆新的 Project Schedule",
+                "createOrEditLabel": "建立或編輯 Project Schedule"
+            },
+            "created": "新的 Project Schedule 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 Project Schedule 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 Project Schedule 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 Project Schedule {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "Project Schedule"
+            },
+            "userId": "User Id",
+            "projectId": "Project Id",
+            "balance": "Balance",
+            "txHash": "Tx Hash",
+            "createTime": "Create Time",
+            "updateTime": "Update Time"
+        }
+    }
+}

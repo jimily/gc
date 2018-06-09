@@ -1,0 +1,80 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="gcApp.projectSell.home.title">Project Sells</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-project-sell" [routerLink]="['/project-sell/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="gcApp.projectSell.home.createLabel">
+            Create new Project Sell
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="projectSells">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="projectId"><span jhiTranslate="gcApp.projectSell.projectId">Project Id</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="copyrightSellType"><span jhiTranslate="gcApp.projectSell.copyrightSellType">Copyright Sell Type</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="sellingPrice"><span jhiTranslate="gcApp.projectSell.sellingPrice">Selling Price</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="txHash"><span jhiTranslate="gcApp.projectSell.txHash">Tx Hash</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="gcApp.projectSell.description">Description</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="ownerUserId"><span jhiTranslate="gcApp.projectSell.ownerUserId">Owner User Id</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="buyerId"><span jhiTranslate="gcApp.projectSell.buyerId">Buyer Id</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="isSell"><span jhiTranslate="gcApp.projectSell.isSell">Is Sell</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="createTime"><span jhiTranslate="gcApp.projectSell.createTime">Create Time</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="updateTime"><span jhiTranslate="gcApp.projectSell.updateTime">Update Time</span> <span class="fas fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let projectSell of projectSells ;trackBy: trackId">
+                <td><a [routerLink]="['/project-sell', projectSell.id, 'view' ]">{{projectSell.id}}</a></td>
+                <td>{{projectSell.projectId}}</td>
+                <td>{{projectSell.copyrightSellType}}</td>
+                <td>{{projectSell.sellingPrice}}</td>
+                <td>{{projectSell.txHash}}</td>
+                <td>{{projectSell.description}}</td>
+                <td>{{projectSell.ownerUserId}}</td>
+                <td>{{projectSell.buyerId}}</td>
+                <td>{{projectSell.isSell}}</td>
+                <td>{{projectSell.createTime}}</td>
+                <td>{{projectSell.updateTime}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/project-sell', projectSell.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/project-sell', projectSell.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'project-sell/'+ projectSell.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="projectSells && projectSells.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

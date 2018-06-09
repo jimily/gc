@@ -1,0 +1,117 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-user-account-heading" jhiTranslate="gcApp.userAccount.home.createOrEditLabel">Create or edit a User Account</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!userAccount.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="userAccount.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.userAccount.userId" for="field_userId">User Id</label>
+                    <input type="number" class="form-control" name="userId" id="field_userId"
+                        [(ngModel)]="userAccount.userId" required/>
+                    <div [hidden]="!(editForm.controls.userId?.dirty && editForm.controls.userId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.userId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.userId?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.userAccount.asset" for="field_asset">Asset</label>
+                    <input type="number" class="form-control" name="asset" id="field_asset"
+                        [(ngModel)]="userAccount.asset" required/>
+                    <div [hidden]="!(editForm.controls.asset?.dirty && editForm.controls.asset?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.asset?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.asset?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.userAccount.pubKey" for="field_pubKey">Pub Key</label>
+                    <input type="text" class="form-control" name="pubKey" id="field_pubKey"
+                        [(ngModel)]="userAccount.pubKey" required/>
+                    <div [hidden]="!(editForm.controls.pubKey?.dirty && editForm.controls.pubKey?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.pubKey?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.userAccount.privateKey" for="field_privateKey">Private Key</label>
+                    <input type="text" class="form-control" name="privateKey" id="field_privateKey"
+                        [(ngModel)]="userAccount.privateKey" required/>
+                    <div [hidden]="!(editForm.controls.privateKey?.dirty && editForm.controls.privateKey?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.privateKey?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.userAccount.blockchainAddress" for="field_blockchainAddress">Blockchain Address</label>
+                    <input type="text" class="form-control" name="blockchainAddress" id="field_blockchainAddress"
+                        [(ngModel)]="userAccount.blockchainAddress" required/>
+                    <div [hidden]="!(editForm.controls.blockchainAddress?.dirty && editForm.controls.blockchainAddress?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.blockchainAddress?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.userAccount.createTime" for="field_createTime">Create Time</label>
+                    <input type="number" class="form-control" name="createTime" id="field_createTime"
+                        [(ngModel)]="userAccount.createTime" required/>
+                    <div [hidden]="!(editForm.controls.createTime?.dirty && editForm.controls.createTime?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createTime?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.createTime?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gcApp.userAccount.updateTime" for="field_updateTime">Update Time</label>
+                    <input type="number" class="form-control" name="updateTime" id="field_updateTime"
+                        [(ngModel)]="userAccount.updateTime" required/>
+                    <div [hidden]="!(editForm.controls.updateTime?.dirty && editForm.controls.updateTime?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.updateTime?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.updateTime?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <span class="fas fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fas fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

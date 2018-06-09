@@ -1,0 +1,31 @@
+
+{
+    "gcApp": {
+        "projectSell" : {
+            "home": {
+                "title": "Project Sells",
+                "createLabel": "创建新 Project Sell",
+                "createOrEditLabel": "创建或编辑 Project Sell"
+            },
+            "created": "Project Sell {{ param }} 创建成功",
+            "updated": "Project Sell {{ param }} 更新成功",
+            "deleted": "Project Sell {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Project Sell {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Project Sell"
+            },
+            "projectId": "Project Id",
+            "copyrightSellType": "Copyright Sell Type",
+            "sellingPrice": "Selling Price",
+            "txHash": "Tx Hash",
+            "description": "Description",
+            "ownerUserId": "Owner User Id",
+            "buyerId": "Buyer Id",
+            "isSell": "Is Sell",
+            "createTime": "Create Time",
+            "updateTime": "Update Time"
+        }
+    }
+}

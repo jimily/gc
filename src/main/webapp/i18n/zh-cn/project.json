@@ -1,0 +1,34 @@
+
+{
+    "gcApp": {
+        "project" : {
+            "home": {
+                "title": "Projects",
+                "createLabel": "创建新 Project",
+                "createOrEditLabel": "创建或编辑 Project"
+            },
+            "created": "Project {{ param }} 创建成功",
+            "updated": "Project {{ param }} 更新成功",
+            "deleted": "Project {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Project {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Project"
+            },
+            "name": "Name",
+            "type": "Type",
+            "description": "Description",
+            "copyrightNo": "Copyright No",
+            "ratio": "Ratio",
+            "gross": "Gross",
+            "onceBuyLimit": "Once Buy Limit",
+            "balance": "Balance",
+            "isEnd": "Is End",
+            "contractAddress": "Contract Address",
+            "userId": "User Id",
+            "createTime": "Create Time",
+            "updateTime": "Update Time"
+        }
+    }
+}
