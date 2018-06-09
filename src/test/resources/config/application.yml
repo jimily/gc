@@ -92,6 +92,8 @@ jhipster:
             enabled: true
             report-frequency: 60 # in seconds
 
+
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

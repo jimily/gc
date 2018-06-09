@@ -1,6 +1,7 @@
 package cn.gc;
 
 import cn.gc.config.ApplicationProperties;
+import cn.gc.config.BlockchainConfig;
 import cn.gc.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SpringBootApplication
-@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
+@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class, BlockchainConfig.class})
 @ComponentScan("cn.gc")
 @MapperScan("cn.gc.service.mapper")
 public class GcApp {

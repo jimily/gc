@@ -344,6 +344,24 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>1.3.1</version>
         </dependency>
+
+        <!-- 布比区块链依赖 -->
+        <dependency>
+            <groupId>cn.bubi.access.sdk</groupId>
+            <artifactId>sdk-starter</artifactId>
+            <version>2.0.1.beta2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate.validator</groupId>
+                    <artifactId>hibernate-validator</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>cn.bubi.access.sdk</groupId>
+            <artifactId>sdk-core</artifactId>
+            <version>2.0.1.beta2</version>
+        </dependency>
     </dependencies>
 
     <build>
