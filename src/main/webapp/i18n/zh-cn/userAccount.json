@@ -1,0 +1,28 @@
+
+{
+    "gcApp": {
+        "userAccount" : {
+            "home": {
+                "title": "User Accounts",
+                "createLabel": "创建新 User Account",
+                "createOrEditLabel": "创建或编辑 User Account"
+            },
+            "created": "User Account {{ param }} 创建成功",
+            "updated": "User Account {{ param }} 更新成功",
+            "deleted": "User Account {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 User Account {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "User Account"
+            },
+            "userId": "User Id",
+            "asset": "Asset",
+            "pubKey": "Pub Key",
+            "privateKey": "Private Key",
+            "blockchainAddress": "Blockchain Address",
+            "createTime": "Create Time",
+            "updateTime": "Update Time"
+        }
+    }
+}

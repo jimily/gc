@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="project">
+            <h2><span jhiTranslate="gcApp.project.detail.title">Project</span> {{project.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gcApp.project.name">Name</span></dt>
+                <dd>
+                    <span>{{project.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.type">Type</span></dt>
+                <dd>
+                    <span>{{project.type}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.description">Description</span></dt>
+                <dd>
+                    <span>{{project.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.copyrightNo">Copyright No</span></dt>
+                <dd>
+                    <span>{{project.copyrightNo}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.ratio">Ratio</span></dt>
+                <dd>
+                    <span>{{project.ratio}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.gross">Gross</span></dt>
+                <dd>
+                    <span>{{project.gross}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.onceBuyLimit">Once Buy Limit</span></dt>
+                <dd>
+                    <span>{{project.onceBuyLimit}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.balance">Balance</span></dt>
+                <dd>
+                    <span>{{project.balance}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.isEnd">Is End</span></dt>
+                <dd>
+                    <span>{{project.isEnd}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.contractAddress">Contract Address</span></dt>
+                <dd>
+                    <span>{{project.contractAddress}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.userId">User Id</span></dt>
+                <dd>
+                    <span>{{project.userId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.createTime">Create Time</span></dt>
+                <dd>
+                    <span>{{project.createTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.project.updateTime">Update Time</span></dt>
+                <dd>
+                    <span>{{project.updateTime}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project', project.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

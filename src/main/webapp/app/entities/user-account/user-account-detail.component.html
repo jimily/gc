@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userAccount">
+            <h2><span jhiTranslate="gcApp.userAccount.detail.title">User Account</span> {{userAccount.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gcApp.userAccount.userId">User Id</span></dt>
+                <dd>
+                    <span>{{userAccount.userId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.userAccount.asset">Asset</span></dt>
+                <dd>
+                    <span>{{userAccount.asset}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.userAccount.pubKey">Pub Key</span></dt>
+                <dd>
+                    <span>{{userAccount.pubKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.userAccount.privateKey">Private Key</span></dt>
+                <dd>
+                    <span>{{userAccount.privateKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.userAccount.blockchainAddress">Blockchain Address</span></dt>
+                <dd>
+                    <span>{{userAccount.blockchainAddress}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.userAccount.createTime">Create Time</span></dt>
+                <dd>
+                    <span>{{userAccount.createTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.userAccount.updateTime">Update Time</span></dt>
+                <dd>
+                    <span>{{userAccount.updateTime}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-account', userAccount.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

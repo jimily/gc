@@ -1,0 +1,34 @@
+
+{
+    "gcApp": {
+        "bizProject" : {
+            "home": {
+                "title": "Biz Projects",
+                "createLabel": "建立一筆新的 Biz Project",
+                "createOrEditLabel": "建立或編輯 Biz Project"
+            },
+            "created": "新的 Biz Project 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 Biz Project 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 Biz Project 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 Biz Project {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "Biz Project"
+            },
+            "name": "Name",
+            "type": "Type",
+            "description": "Description",
+            "copyrightNo": "Copyright No",
+            "ratio": "Ratio",
+            "gross": "Gross",
+            "onceBuyLimit": "Once Buy Limit",
+            "balance": "Balance",
+            "isEnd": "Is End",
+            "contractAddress": "Contract Address",
+            "userId": "User Id",
+            "createTime": "Create Time",
+            "updateTime": "Update Time"
+        }
+    }
+}

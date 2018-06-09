@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectSell">
+            <h2><span jhiTranslate="gcApp.projectSell.detail.title">Project Sell</span> {{projectSell.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gcApp.projectSell.projectId">Project Id</span></dt>
+                <dd>
+                    <span>{{projectSell.projectId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.copyrightSellType">Copyright Sell Type</span></dt>
+                <dd>
+                    <span>{{projectSell.copyrightSellType}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.sellingPrice">Selling Price</span></dt>
+                <dd>
+                    <span>{{projectSell.sellingPrice}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.txHash">Tx Hash</span></dt>
+                <dd>
+                    <span>{{projectSell.txHash}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.description">Description</span></dt>
+                <dd>
+                    <span>{{projectSell.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.ownerUserId">Owner User Id</span></dt>
+                <dd>
+                    <span>{{projectSell.ownerUserId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.buyerId">Buyer Id</span></dt>
+                <dd>
+                    <span>{{projectSell.buyerId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.isSell">Is Sell</span></dt>
+                <dd>
+                    <span>{{projectSell.isSell}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.createTime">Create Time</span></dt>
+                <dd>
+                    <span>{{projectSell.createTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="gcApp.projectSell.updateTime">Update Time</span></dt>
+                <dd>
+                    <span>{{projectSell.updateTime}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-sell', projectSell.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
