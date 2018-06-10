@@ -13,9 +13,9 @@ public class BuyCopyRightInput {
      */
     private String action;
     /**
-     * 版权类型：'PUBLICATION'
+     * 版权类型：'publication'
      */
-    private String copyRight;
+    private String copyright;
     /**
      * 项目：'ideas-类型-名称-创意合约地址'
      */
@@ -28,6 +28,10 @@ public class BuyCopyRightInput {
      * 购买金额：单位分
      */
     private Long amount;
+    /**
+     * 创意登记人地址
+     */
+    private String registrant;
 
     public String getAction() {
         return action;
@@ -37,12 +41,12 @@ public class BuyCopyRightInput {
         this.action = action;
     }
 
-    public String getCopyRight() {
-        return copyRight;
+    public String getCopyright() {
+        return copyright;
     }
 
-    public void setCopyRight(String copyRight) {
-        this.copyRight = copyRight;
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 
     public String getProject() {
@@ -67,5 +71,13 @@ public class BuyCopyRightInput {
 
     public void setAmount(Long amount) {
         this.amount = amount;
+    }
+
+    public String getRegistrant() {
+        return registrant;
+    }
+
+    public void setRegistrant(String registrant) {
+        this.registrant = registrant;
     }
 }

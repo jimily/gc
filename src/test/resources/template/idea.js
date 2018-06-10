@@ -1,13 +1,11 @@
 const registrant = '{temp_registrant}';
 
 function main(inputData) {
-    callBackLog("inputData: " + inputData);
     try {
         var input = JSON.parse(inputData);
     } catch (error) {
         return;
     }
-
     var action = input.action;
     switch (action) {
         case ACTION.CREATE :
@@ -199,21 +197,18 @@ function initProject(type,classify,name,thisAddress) {
 /** 创意分润**/
 function profit(input) {
     if (sender != registrant) {
-        throw "{'code':'100108','msg':'分润需由创意者触发'}";
+        throw "{'code':'100104','msg':'该操作需要是创意者本人哟'}";
     }
     if (input.amount <= 0) {
         throw "{'code':'100105','msg':'金额不对'}";
     }
     var investorRecords = getInvestorRecords();
-    if (investorRecords.length == 0) {
-        return;
-    }
-    var info = JSON.parse(callBackGetAccountMetaData(thisAddress, 'info').value);
+    var info = getMetadataValue('info');
     var operations = [];
     var balance = input.amount;
     for (var i = 0 ; i < investorRecords.length; i++) {
         var investor = investorRecords[i];
-        var profit = paseInt(input.amount * investor.rate / 100);
+        var profit = parseInt(input.amount * investor.rate / 100);
         balance = balance - profit;
         var incomeInput = {
             'project':initProject('invest',info.classify,info.name,thisAddress),
@@ -247,6 +242,17 @@ function profit(input) {
     };
 
     callBackDoOperation(transaction);
+}
+function getMetadataValue(key) {
+
+    var records = {};
+
+    var metadata = callBackGetAccountMetaData(thisAddress, key);
+    if (metadata) {
+        records = JSON.parse(metadata.value);
+    }
+
+    return records;
 }
 
 /** 检查众筹状态**/

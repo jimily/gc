@@ -1,13 +1,11 @@
 const registrant = '{temp_registrant}';
 
 function main(inputData) {
-    callBackLog("inputData: " + inputData);
     try {
         var input = JSON.parse(inputData);
     } catch (error) {
         return;
     }
-
     var action = input.action;
     switch (action) {
         case ACTION.CREATE :
@@ -168,14 +166,14 @@ function finish() {
 
 }
 
-/** 众筹结束将额度转给创意者**/
+/** 众筹结束将收益转给创意者**/
 function settlement() {
     var info = JSON.parse(callBackGetAccountMetaData(thisAddress, 'info').value);
-    var total = info.total;
+    var total = getAmount('total');
     var balance = getAmount('balance');
     var registrantInput = {
         'action':'finishRaise',
-        'project':'ideas'+info.classify+info.name+thisAddress,
+        'project':initProject('ideas',info.classify,info.name,thisAddress),
         'amount':total - balance
     };
 
@@ -183,37 +181,37 @@ function settlement() {
         'operations': [{
             'type': 3,
             'payment': {
-                'dest_address': registrant
-            },
-            'input': JSON.stringify(registrantInput)
+                'dest_address': registrant,
+                'input': JSON.stringify(registrantInput)
+            }
         }]
     };
 
     callBackDoOperation(transaction);
 }
 
+function initProject(type,classify,name,thisAddress) {
+    return type + "-" + classify + "-" + name + "-" + thisAddress;
+}
+
 /** 创意分润**/
 function profit(input) {
     if (sender != registrant) {
-        throw "{'code':'100108','msg':'分润需由创意者触发'}";
+        throw "{'code':'100104','msg':'该操作需要是创意者本人哟'}";
     }
     if (input.amount <= 0) {
         throw "{'code':'100105','msg':'金额不对'}";
     }
     var investorRecords = getInvestorRecords();
-    if (investorRecords.length == 0) {
-        return;
-    }
-    var info = JSON.parse(callBackGetAccountMetaData(thisAddress, 'info').value);
-    var project = info.classify + info.name + thisAddress;
+    var info = getMetadataValue('info');
     var operations = [];
     var balance = input.amount;
     for (var i = 0 ; i < investorRecords.length; i++) {
         var investor = investorRecords[i];
-        var profit = paseInt(input.amount * investor.rate / 100);
+        var profit = parseInt(input.amount * investor.rate / 100);
         balance = balance - profit;
         var incomeInput = {
-            'project':'invest' + project,
+            'project':initProject('invest',info.classify,info.name,thisAddress),
             'amount': profit,
             'contractAddress': thisAddress,
             'action':'incomeOfInveste'
@@ -221,29 +219,40 @@ function profit(input) {
         operations.push({
             'type': 3,
             'payment': {
-                'dest_address': investor.address
-            },
-            'input': JSON.stringify(incomeInput)
+                'dest_address': investor.address,
+                'input': JSON.stringify(incomeInput)
+            }
         });
     }
     var incomeInput = {
         'contractAddress':thisAddress,
-        'project':'ideas' + project,
+        'project':initProject('ideas',info.classify,info.name,thisAddress),
         'amount': balance,
         'action':'incomeOfIdea'
     };
     operations.push({
         'type': 3,
         'payment': {
-            'dest_address': registrant
-        },
-        'input': JSON.stringify(incomeInput)
+            'dest_address': registrant,
+            'input': JSON.stringify(incomeInput)
+        }
     });
     var transaction = {
         'operations': operations
     };
 
     callBackDoOperation(transaction);
+}
+function getMetadataValue(key) {
+
+    var records = {};
+
+    var metadata = callBackGetAccountMetaData(thisAddress, key);
+    if (metadata) {
+        records = JSON.parse(metadata.value);
+    }
+
+    return records;
 }
 
 /** 检查众筹状态**/
